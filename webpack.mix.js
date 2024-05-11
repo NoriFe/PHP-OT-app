@@ -4,3 +4,4 @@ mix.js('resources/js/app.js', 'public/js')
    .postCss('resources/css/app.css', 'public/css', [
         require('tailwindcss'),
     ]);
+// Path: resources/views/layouts/app.blade.php
