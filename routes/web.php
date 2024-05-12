@@ -17,4 +17,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+Route::resource('overtimes', 'App\Http\Controllers\OvertimeController')->middleware('auth');
+
 require __DIR__.'/auth.php';
