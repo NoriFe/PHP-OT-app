@@ -70,7 +70,33 @@ class OvertimeController extends Controller
                             ->where('date', '>', now())
                             ->get();
 
+        $overtimesForCalendar = $overtimes->map(function ($overtime) {
+            return [
+                'title' => $overtime->hours . ' hours',
+                'start' => $overtime->date,
+            ];
+        });
+
+        return view('dashboard', ['overtimes' => $overtimesForCalendar]);
+    }
+
+    public function showDashboard()
+    {
+        $overtimes = Overtime::all(); // Fetch all overtimes from the database
+
         return view('dashboard', ['overtimes' => $overtimes]);
+    }
+
+    public function add(Request $request)
+    {
+        // Validate and save the overtime data...
+        
+        // Return a response
+        return response()->json([
+            'Date' => $request->date,
+            'Localization' => $request->localization,
+            'Daytime' => $request->daytime,
+        ]);
     }
 
 
