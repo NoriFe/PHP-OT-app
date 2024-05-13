@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Overtime;
 
 class OvertimeController extends Controller
 {
@@ -62,4 +63,17 @@ class OvertimeController extends Controller
     {
         //
     }
+
+    public function dashboard()
+    {
+        $overtimes = Overtime::where('user_id', auth()->id())
+                            ->where('date', '>', now())
+                            ->get();
+
+        return view('dashboard', ['overtimes' => $overtimes]);
+    }
+
+
+    
+
 }
