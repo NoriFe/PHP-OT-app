@@ -35,12 +35,15 @@
 @push('scripts')
 <script src='https://cdn.jsdelivr.net/npm/fullcalendar@6.1.11/index.global.min.js'></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="/path/to/your/script.js" data-overtimes="{{ json_encode($overtimes) }}"></script>
 <script>
-$(document).ready(function() {
+document.addEventListener('DOMContentLoaded', function() {
+    var overtimes = JSON.parse(document.querySelector('script[data-overtimes]').dataset.overtimes);
+
     var calendarEl = document.getElementById('calendar');
     var calendar = new FullCalendar.Calendar(calendarEl, {
         initialView: 'dayGridMonth',
-        events: {!! json_encode($overtimes) !!},
+        events: overtimes,
     });
     calendar.render();
 
